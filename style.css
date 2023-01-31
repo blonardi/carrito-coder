@@ -44,6 +44,14 @@ body {
 	border-radius: 5px;
 }
 
+.container-home {
+	background-color: floralwhite;
+}
+
+.container-home h3 {
+	color: black;
+}
+
 /* #cards {
 	display: grid;
 	grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
