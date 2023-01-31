@@ -43,7 +43,7 @@ const pintarCards = data => {
         templateCard.querySelector('.card-title').textContent = proyecto.nombre
         templateCard.querySelector('#category').textContent = proyecto.categoria
         templateCard.querySelector('.card-text').textContent = proyecto.presentacion
-        templateCard.querySelector('.precio').textContent = proyecto.precio
+        templateCard.querySelector('.precio').textContent = `$ ${proyecto.precio}`
         templateCard.querySelector('.btn-primary').dataset.id = proyecto.id
         // console.log(templateCard)
         const clone = templateCard.cloneNode(true)
@@ -53,6 +53,39 @@ const pintarCards = data => {
     cards.appendChild(fragment)
 }
 
+// const buscarProyecto = () => {
+//     const botonBuscar = document.querySelector('#buscar-proyecto');
+//     botonBuscar.addEventListener('click', () => {
+//         const inputBusqueda = document.querySelector('#nombre-proyecto').value
+//         console.log(inputBusqueda)
+//         let proyectos = data.nombre;
+//         // let proyectosBuscados = proyectos.map(proyecto => {
+//         //     let pro = proyecto.innerText;
+//         //     pro.includes(inputBusqueda)
+//         // });
+
+//         console.log(proyectos)
+
+//         // pintarCards(proyectosBuscados)
+
+//     })
+// }
+
+// buscarProyecto(data)
+
+function searchFilters(input,selector) {
+    const inputBusqueda = document.querySelector('#nombre-proyecto');
+    inputBusqueda.addEventListener("keyup", e => {
+        // console.log(e.key)
+        console.log(inputBusqueda.value);
+        let valorDeBusqueda = inputBusqueda.value
+        document.querySelectorAll(selector).forEach(el => 
+            el.textContent.toLowerCase().includes(valorDeBusqueda) 
+            ? el.closest(".card").classList.remove('filter') 
+            : el.closest(".card").classList.add('filter')
+        )
+    })
+}
 
 const addToCarrito = e => {
         if (e.target.classList.contains('btn-primary')) {
@@ -222,4 +255,5 @@ window.onload = function(){
         carrito = storage
         renderCarrito()
     }
+    searchFilters('.nombre-proyecto', '.card-title')
 }
